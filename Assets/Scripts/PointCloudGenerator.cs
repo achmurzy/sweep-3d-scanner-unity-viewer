@@ -11,6 +11,7 @@ using SFB;
 public class PointCloudGenerator : MonoBehaviour
 {
     public Material pointCloudMaterial;
+    public float HueOffset, Saturation, Lightness;
 
     // maintained reference to the generated children (point cloud objects)
     private GameObject[] pointClouds;
@@ -96,7 +97,7 @@ public class PointCloudGenerator : MonoBehaviour
             // Create the point cloud using the subset of data
             GameObject obj = new GameObject("Empty");
             obj.transform.SetParent(transform, false);
-            obj.AddComponent<PointCloud>().CreateMesh(positions, normalizedSignalStrength);
+            obj.AddComponent<PointCloud>().CreateMesh(positions, normalizedSignalStrength, HueOffset, Saturation, Lightness);
             obj.GetComponent<MeshRenderer>().material = pointCloudMaterial;
             pointClouds[i] = obj;
         }

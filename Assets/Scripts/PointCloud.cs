@@ -13,7 +13,7 @@ public class PointCloud : MonoBehaviour
     int numPoints = 0;
 
     // Creates the gameObject's mesh using the provided points and signal strength values
-    public void CreateMesh(Vector3[] points, float[] normalizedSignalStrength)
+    public void CreateMesh(Vector3[] points, float[] normalizedSignalStrength, float hue_offset, float saturation, float lightness)
     {
         numPoints = points.Length;
         mesh = new Mesh();
@@ -25,7 +25,7 @@ public class PointCloud : MonoBehaviour
         {
             indices[i] = i;
             // map the normalized signal strength onto the hue spectrum in HSV color space
-            colors[i] = Color.HSVToRGB(normalizedSignalStrength[i], 1.0f, 1.0f);
+            colors[i] = Color.HSVToRGB(normalizedSignalStrength[i]+hue_offset, saturation, lightness);
         }
 
         mesh.vertices = points;
